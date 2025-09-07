@@ -1,0 +1,18 @@
+.env
+# Go build
+*.exe
+*.out
+*.bin
+
+# Vendor directory
+vendor/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# MacOS
+.DS_Store
+
+# Editor swap files
+*.swp
