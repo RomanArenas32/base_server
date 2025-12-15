@@ -36,6 +36,14 @@ func main() {
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, internal.HelloHandler())
 	})
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if data, err := internal.HealthCheckHandler(); err != nil {
+			http.Error(w, "Health check failed", http.StatusInternalServerError)
+		} else {
+			w.Write(data)
+		}
+	})
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
